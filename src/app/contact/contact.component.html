@@ -1,0 +1,52 @@
+<div class="container">
+    <h1>Aplikasi Kontak - Data Binding</h1>
+    <div>
+        <!-- Kita Banding data dengan Event click display -->
+        <!-- dan class active kita buat menjadi properti binding
+        dimana, class active akan aktif ketika display sama dengan display yg dituju
+        -->
+        <button type="button" [class.active]="display=='dashboard'" (click)="onMenuClick('dashboard')">Dashboard</button>
+        <button type="button" [class.active]="display=='list'" (click)="onMenuClick('list')">Daftar Kontak</button>
+    </div>
+
+    <!-- Memasukkan data dari contact.component.ts dengan properti binding ke dashboard dan contact-list -->
+    <!-- Membuat Data Sesuai Display dengan menggunakan directive ngIf -->
+
+    <!-- Pemanggilan dashboard.component.html dengan selector <dashboard> -->
+    <dashboard *ngIf="display=='dashboard'" [contacts]="contacts" (select)="onSelect($event)"></dashboard>
+    
+    <!-- Pemanggilan contact-list.component.html dengan selector <contact-list> -->
+    <contact-list *ngIf="display=='list'" [contacts]="contacts"></contact-list>
+
+    <!-- Pemanggilan contact-detail.component.html dengan selector <contact-detail> -->
+    <contact-detail *ngIf="display=='detail'" [contact]="contact" (onSave)="onSave($event)" (onCancel)="onCancel()"></contact-detail>
+</div>
+
+<style>
+    .container {
+        width: 800px;
+        margin: 0 auto;
+    }
+
+    .container h1 {
+        color: #2196f3;
+    }
+
+    button {
+        line-height: 30px;
+        border:solid 1px #0069c0;
+        margin-right: 10px;
+        border-radius: 8px;
+        padding: 0 24px;
+        color: #0069c0;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .active {
+        background: #2196f3;
+        color: white;
+        font-weight: 700;
+    }
+
+</style>
